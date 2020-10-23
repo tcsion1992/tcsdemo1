@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<componentConfig>
+    <!-- Torque Component -->
+    <torque>
+       <configfile>/WEB-INF/conf/Torque.properties</configfile>
+    </torque>
+    <cache cacheInitialSize="20" cacheCheckFrequency="5"/>
+    <mimetype/>
+    <crypto>
+      <algorithm>
+        <unix>org.apache.fulcrum.crypto.provider.UnixCrypt</unix>
+        <clear>org.apache.fulcrum.crypto.provider.ClearCrypt</clear>
+        <java>org.apache.fulcrum.crypto.provider.JavaCrypt</java>
+        <oldjava>org.apache.fulcrum.crypto.provider.OldJavaCrypt</oldjava>
+      </algorithm>
+    </crypto>
+    <localization>
+      <bundles>
+        <bundle>in.ion.tcsiondemo.L10N</bundle>
+      </bundles>
+    </localization>
+    <!-- Disable if you experience startup problems with Java8 -->
+    <intake>
+      <serialDataPath>WEB-INF/appData.ser</serialDataPath>
+      <xmlPaths>
+        <xmlPath>WEB-INF/conf/intake.xml</xmlPath>
+      </xmlPaths>
+    </intake>
+    <factory/>
+    <pool/>
+    <parser>
+        <parameterEncoding>utf-8</parameterEncoding>
+        <automaticUpload>true</automaticUpload>
+    </parser>
+    <upload repository="/tmp" sizeMax="1048576" sizeThreshold="10240"/>
+        <!-- These components belong to the Fulcrum-Security services -->        
+    <securityService/>
+    <authenticator/>
+    <modelManager/>
+    <aclFactory/>
+    
+    <!--  
+       Fulcrum Components, e.g. json, XmlRpcServerComponent, cft. Fulcrum Component Configurations 
+     -->
+       
+     
+     <!--  
+     Pure Fulcrum Model
+    -->
+    <!--
+     <userManager> 
+       <className>org.apache.fulcrum.security.torque.om.TorqueTurbineUser</className>
+    </userManager>
+    <groupManager>
+        <className>org.apache.fulcrum.security.torque.om.TorqueTurbineGroup</className>
+    </groupManager>
+    <roleManager>
+        <className>org.apache.fulcrum.security.torque.om.TorqueTurbineRole</className>
+    </roleManager>
+    <permissionManager>
+        <className>org.apache.fulcrum.security.torque.om.TorqueTurbinePermission</className>
+    </permissionManager>
+    -->
+ 
+     <!-- 
+     Default classes implementing org.apache.fulcrum.security.model.turbine.entity interfaces 
+     -->
+    <!--userManager>
+        <className>org.apache.fulcrum.security.model.turbine.entity.impl.TurbineUserImpl</className>
+    </userManager>
+    <groupManager>
+        <className>org.apache.fulcrum.security.model.turbine.entity.impl.TurbineGroupImpl</className>
+    </groupManager>
+    <roleManager>
+        <className>org.apache.fulcrum.security.model.turbine.entity.impl.TurbineRoleImpl</className>
+    </roleManager>
+    <permissionManager>
+        <className>org.apache.fulcrum.security.model.turbine.entity.impl.TurbinePermissionImpl</className>
+    </permissionManager -->
+    
+    <!-- 
+     Custom Turbine ORM Torque classes could not yet be used: 
+     - requires Torque 4.1 or if using Torque 4.0 reqires manually adding the interfaces in T-classes
+     - requires attribute baseClass in fulcrum-turbine-schema.xml table elements set to appropriate org.apache.fulcrum.security.model.turbine.entity interfaces
+     - requires attribute peerClass in fulcrum-turbine-schema.xml table elements set to org.apache.fulcrum.security.torque.peer.TorqueTurbinePeer 
+     -->
+     
+     <userManager>
+     <className>in.ion.tcsiondemo.om.TurbineUser</className>
+        <peerClassName>in.ion.tcsiondemo.om.TurbineUserPeerImpl</peerClassName>
+    </userManager>
+    <groupManager>
+        <className>in.ion.tcsiondemo.om.TurbineGroup</className>
+        <peerClassName>in.ion.tcsiondemo.om.TurbineGroupPeerImpl</peerClassName>
+    </groupManager>
+    <roleManager>
+        <className>in.ion.tcsiondemo.om.TurbineRole</className>
+        <peerClassName>in.ion.tcsiondemo.om.TurbineRolePeerImpl</peerClassName>
+    </roleManager>
+    <permissionManager>
+        <className>in.ion.tcsiondemo.om.TurbinePermission</className>
+        <peerClassName>in.ion.tcsiondemo.om.TurbinePermissionPeerImpl</peerClassName>
+    </permissionManager>
+     <peerManager/>
+     
+</componentConfig>
